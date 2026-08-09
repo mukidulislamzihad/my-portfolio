@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mukidul Islam Zihad — Cybersecurity | Network Security | SOC Analyst</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#080a08;
+    --panel:#0d110d;
+    --panel-2:#0f150f;
+    --border:#1d3a22;
+    --border-soft:#152816;
+    --green:#39ff6a;
+    --green-dim:#22b34a;
+    --green-soft:#8fe6a8;
+    --text:#c8f2d1;
+    --text-dim:#5c8a68;
+    --amber:#f2c14e;
+    --red:#ff5f56;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    background:var(--bg);
+    background-image:
+      repeating-linear-gradient(0deg, rgba(57,255,106,0.018) 0px, rgba(57,255,106,0.018) 1px, transparent 1px, transparent 3px);
+    color:var(--text);
+    font-family:'JetBrains Mono', monospace;
+    font-size:14.5px;
+    line-height:1.7;
+    -webkit-font-smoothing:antialiased;
+  }
+  a{color:var(--green-soft); text-decoration:none;}
+  a:hover{color:var(--green);}
+  .wrap{max-width:880px; margin:0 auto; padding:0 24px;}
+  ::selection{background:var(--green-dim); color:#04150a;}
+
+  /* window chrome */
+  .winbar{
+    border-bottom:1px solid var(--border);
+    background:var(--panel);
+    padding:10px 0;
+    position:sticky; top:0; z-index:30;
+  }
+  .winbar .wrap{display:flex; align-items:center; gap:10px;}
+  .dots{display:flex; gap:6px;}
+  .dots span{width:11px; height:11px; border-radius:50%; display:inline-block;}
+  .dots .r{background:var(--red);}
+  .dots .y{background:var(--amber);}
+  .dots .g{background:var(--green-dim);}
+  .winbar .title{color:var(--text-dim); font-size:12.5px; flex:1; text-align:center;}
+
+  /* hero */
+  .hero{padding:54px 0 30px;}
+  .prompt{color:var(--text-dim); font-size:13px;}
+  .prompt .user{color:var(--green);}
+  .prompt .path{color:var(--green-soft);}
+  .cursor{display:inline-block; width:8px; height:16px; background:var(--green); vertical-align:middle; animation:blink 1s steps(1) infinite; margin-left:2px;}
+  @keyframes blink{50%{opacity:0;}}
+
+  .hero-grid{display:grid; grid-template-columns:1fr; gap:40px; align-items:start; margin-top:22px;}
+  h1.name{
+    font-size:clamp(24px,4vw,34px);
+    color:var(--green);
+    margin:0 0 4px;
+    letter-spacing:-0.01em;
+  }
+  .role-line{color:var(--green-soft); font-size:15px; margin:0 0 6px;}
+  .loc-line{color:var(--text-dim); font-size:13px; margin:0 0 20px;}
+  .about-out{color:var(--text); font-size:14px; max-width:64ch; margin:0 0 24px;}
+  .about-out .comment{color:var(--text-dim);}
+
+  .cta-row{display:flex; gap:12px; flex-wrap:wrap;}
+  .btn{
+    font-family:'JetBrains Mono', monospace;
+    font-size:13px;
+    padding:10px 16px;
+    border:1px solid var(--border);
+    background:var(--panel);
+    color:var(--green-soft);
+    display:inline-flex; align-items:center; gap:8px;
+    transition:border-color .15s ease, color .15s ease, background .15s ease;
+  }
+  .btn:hover{border-color:var(--green-dim); color:var(--green); background:var(--panel-2);}
+  .btn.primary{background:var(--green-dim); color:#04150a; border-color:var(--green-dim); font-weight:600;}
+  .btn.primary:hover{background:var(--green); border-color:var(--green); color:#04150a;}
+
+  /* tab nav */
+  .tabnav{border-bottom:1px solid var(--border); background:var(--bg); position:sticky; top:41px; z-index:20;}
+  .tabnav .wrap{display:flex; gap:0; overflow-x:auto;}
+  .tabnav a{
+    padding:12px 16px;
+    font-size:12.5px;
+    color:var(--text-dim);
+    border-right:1px solid var(--border-soft);
+    white-space:nowrap;
+  }
+  .tabnav a:hover{color:var(--green); background:var(--panel);}
+  .tabnav a::before{content:'$ ';color:var(--text-dim);}
+
+  section{padding:46px 0; border-bottom:1px solid var(--border-soft);}
+  .sec-cmd{color:var(--text-dim); font-size:13px; margin-bottom:20px;}
+  .sec-cmd .p{color:var(--green);}
+  .sec-cmd .c{color:var(--green-soft);}
+
+  /* education log */
+  .log-entry{
+    display:grid; grid-template-columns:150px 1fr; gap:16px;
+    padding:14px 0; border-top:1px dashed var(--border-soft);
+  }
+  .log-entry:last-child{border-bottom:1px dashed var(--border-soft);}
+  .log-time{color:var(--text-dim); font-size:12.5px;}
+  .log-entry h3{margin:0 0 4px; color:var(--green-soft); font-size:15px; font-weight:600;}
+  .log-entry p{margin:0 0 8px; color:var(--text); font-size:13.5px;}
+  .status{
+    display:inline-block; font-size:11px; padding:2px 8px; border:1px solid var(--green-dim); color:var(--green);
+  }
+
+  /* directory listing (skills) */
+  .dir{margin-bottom:26px;}
+  .dir-head{color:var(--green-soft); font-size:13.5px; margin-bottom:8px;}
+  .dir-head .perm{color:var(--text-dim); margin-right:10px;}
+  .dir-list{list-style:none; margin:0; padding:0 0 0 22px; color:var(--text); font-size:13px;}
+  .dir-list li{padding:3px 0; position:relative;}
+  .dir-list li::before{content:'- '; color:var(--text-dim);}
+
+  /* projects */
+  .proj-ls{color:var(--text-dim); font-size:13px; margin-bottom:24px; line-height:2;}
+  .proj-ls span{color:var(--green-soft); cursor:pointer;}
+  .proj-ls span:hover{color:var(--green);}
+
+  .proj-card{
+    border:1px solid var(--border); background:var(--panel);
+    margin-bottom:16px;
+  }
+  .proj-head{
+    padding:9px 14px; border-bottom:1px solid var(--border);
+    font-size:12.5px; color:var(--text-dim); display:flex; justify-content:space-between;
+  }
+  .proj-body{padding:16px 18px;}
+  .proj-body h3{margin:0 0 4px; color:var(--green); font-size:16px;}
+  .proj-role{color:var(--green-soft); font-size:12px; margin-bottom:10px;}
+  .proj-body p{margin:0 0 12px; color:var(--text); font-size:13.5px; max-width:64ch;}
+  .tag-row{display:flex; flex-wrap:wrap; gap:8px;}
+  .tag{font-size:11px; padding:4px 9px; border:1px solid var(--border); color:var(--text-dim);}
+
+  /* contact config */
+  .cfg-line{
+    display:grid; grid-template-columns:110px 1fr; gap:14px;
+    padding:9px 0; border-top:1px dashed var(--border-soft); font-size:13.5px;
+  }
+  .cfg-line:last-child{border-bottom:1px dashed var(--border-soft);}
+  .cfg-key{color:var(--text-dim);}
+  .cfg-val{color:var(--green-soft);}
+
+  footer{padding:26px 0 46px; text-align:center; color:var(--text-dim); font-size:12px;}
+  footer .p{color:var(--green-dim);}
+
+  .reveal{opacity:0; transform:translateY(10px); transition:opacity .45s ease, transform .45s ease;}
+  .reveal.in{opacity:1; transform:translateY(0);}
+
+  @media (max-width:720px){
+    .hero-grid{grid-template-columns:1fr;}
+    .log-entry{grid-template-columns:1fr; gap:4px;}
+    .cfg-line{grid-template-columns:1fr; gap:2px;}
+  }
+</style>
+</head>
+<body>
+
+<div class="winbar">
+  <div class="wrap">
+    <span class="dots"><span class="r"></span><span class="y"></span><span class="g"></span></span>
+    <span class="title">zihad@portfolio: ~</span>
+  </div>
+</div>
+
+<nav class="tabnav">
+  <div class="wrap">
+    <a href="#education">education.log</a>
+    <a href="#skills">skills.sh</a>
+    <a href="#projects">projects/</a>
+    <a href="#contact">contact.cfg</a>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="wrap">
+    <p class="prompt"><span class="user">guest@zihad</span>:<span class="path">~</span>$ whoami<span class="cursor"></span></p>
+
+    <div class="hero-grid">
+      <div>
+        <h1 class="name">Mukidul Islam Zihad</h1>
+        <p class="role-line">Cybersecurity · Network Security · SOC Analyst</p>
+        <p class="loc-line">based in Dhaka, Bangladesh — open to internship / freelance work</p>
+
+        <p class="prompt"><span class="user">guest@zihad</span>:<span class="path">~</span>$ cat about.md</p>
+        <p class="about-out"><span class="comment"># </span>Computer Science &amp; Technology student at Daffodil Polytechnic Institute, also completing a Diploma in IT Infrastructure &amp; Cybersecurity at Creative IT Institute. Learning network defense, SOC operations, and penetration testing step by step, alongside the programming and systems fundamentals (Python, Java, databases, operating systems) that support them. Open to internships and entry-level freelance work.</p>
+
+        <div class="cta-row">
+          <a class="btn primary" href="#projects">./view-projects.sh</a>
+          <a class="btn" href="#contact">open contact.cfg</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<section id="education">
+  <div class="wrap">
+    <p class="sec-cmd"><span class="p">$</span> <span class="c">cat education.log</span></p>
+
+    <div class="reveal">
+      <div class="log-entry">
+        <span class="log-time">2026 — 2030<br><span class="status">in progress</span></span>
+        <div>
+          <h3>Daffodil Polytechnic Institute</h3>
+          <p>Diploma in Engineering — Computer Science &amp; Technology (CST). Still ongoing.</p>
+        </div>
+      </div>
+      <div class="log-entry">
+        <span class="log-time">2026 — 2027<br><span class="status">in progress</span></span>
+        <div>
+          <h3>Creative IT Institute</h3>
+          <p>Diploma in IT Infrastructure &amp; Cybersecurity — networking, ethical hacking, and SOC operations track. Still ongoing.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="skills">
+  <div class="wrap">
+    <p class="sec-cmd"><span class="p">$</span> <span class="c">ls -la skills/</span></p>
+
+    <div class="reveal">
+      <div class="dir">
+        <p class="dir-head"><span class="perm">drwxr-xr-x</span>soc-blue-team/</p>
+        <ul class="dir-list">
+          <li>SIEM (Splunk / Elastic)</li>
+          <li>Log analysis</li>
+          <li>Threat hunting</li>
+          <li>Incident response</li>
+          <li>Cyber threat intelligence (CTI)</li>
+        </ul>
+      </div>
+
+      <div class="dir">
+        <p class="dir-head"><span class="perm">drwxr-xr-x</span>network-security/</p>
+        <ul class="dir-list">
+          <li>Routing &amp; switching</li>
+          <li>Firewalls, VLANs</li>
+          <li>CCNA / MTCNA fundamentals</li>
+          <li>Network administration &amp; services</li>
+        </ul>
+      </div>
+
+      <div class="dir">
+        <p class="dir-head"><span class="perm">drwxr-xr-x</span>offensive-testing/</p>
+        <ul class="dir-list">
+          <li>Penetration testing</li>
+          <li>Vulnerability assessment</li>
+          <li>Metasploit, Nmap, Burp Suite</li>
+        </ul>
+      </div>
+
+      <div class="dir">
+        <p class="dir-head"><span class="perm">drwxr-xr-x</span>programming-and-systems/</p>
+        <ul class="dir-list">
+          <li>Python</li>
+          <li>Java</li>
+          <li>Database management systems (DBMS)</li>
+          <li>Operating systems (Linux / Windows)</li>
+          <li>Web design &amp; development</li>
+        </ul>
+      </div>
+
+      <div class="dir">
+        <p class="dir-head"><span class="perm">drwxr-xr-x</span>field-tools/</p>
+        <ul class="dir-list">
+          <li>Kali Linux</li>
+          <li>Wireshark</li>
+          <li>GNS3, Packet Tracer</li>
+          <li>Snort, OWASP ZAP</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="projects">
+  <div class="wrap">
+    <p class="sec-cmd"><span class="p">$</span> <span class="c">ls -la projects/</span></p>
+    <p class="proj-ls reveal">
+      <span onclick="document.getElementById('p1').scrollIntoView({behavior:'smooth'})">01_web-app-pentest.md</span><br>
+      <span onclick="document.getElementById('p2').scrollIntoView({behavior:'smooth'})">02_soc-implementation.md</span><br>
+      <span onclick="document.getElementById('p3').scrollIntoView({behavior:'smooth'})">03_server-pentest.md</span><br>
+      <span onclick="document.getElementById('p4').scrollIntoView({behavior:'smooth'})">04_corporate-network-design.md</span>
+    </p>
+
+    <div class="reveal">
+      <div class="proj-card" id="p1">
+        <div class="proj-head"><span>cat 01_web-app-pentest.md</span><span>case_01</span></div>
+        <div class="proj-body">
+          <h3>Web application penetration testing</h3>
+          <p class="proj-role">role: penetration tester (trainee)</p>
+          <p>Simulated real-world attacks on a lab web application — reconnaissance, vulnerability scanning, and manual testing for issues such as SQL injection and XSS. Findings documented in a structured report with severity ratings and remediation notes, aligned to the OWASP Top 10.</p>
+          <div class="tag-row"><span class="tag">Burp Suite</span><span class="tag">OWASP ZAP</span><span class="tag">Nmap</span><span class="tag">OWASP Top 10</span></div>
+        </div>
+      </div>
+
+      <div class="proj-card" id="p2">
+        <div class="proj-head"><span>cat 02_soc-implementation.md</span><span>case_02</span></div>
+        <div class="proj-body">
+          <h3>SOC implementation &amp; event monitoring</h3>
+          <p class="proj-role">role: SOC analyst (trainee)</p>
+          <p>Built a lab SOC environment to monitor, detect, and respond to security events. Configured a SIEM to collect and correlate logs from endpoints, firewalls, and Active Directory, then investigated triggered alerts through a structured incident response workflow.</p>
+          <div class="tag-row"><span class="tag">SIEM</span><span class="tag">Log analysis</span><span class="tag">Incident response</span><span class="tag">Event monitoring</span></div>
+        </div>
+      </div>
+
+      <div class="proj-card" id="p3">
+        <div class="proj-head"><span>cat 03_server-pentest.md</span><span>case_03</span></div>
+        <div class="proj-body">
+          <h3>Server penetration testing</h3>
+          <p class="proj-role">role: penetration tester (trainee)</p>
+          <p>Assessed a lab server's security posture through scanning, service enumeration, and controlled exploitation of known vulnerabilities. Verified misconfigurations and privilege escalation paths, then documented hardening recommendations.</p>
+          <div class="tag-row"><span class="tag">Nmap</span><span class="tag">Metasploit</span><span class="tag">Vulnerability assessment</span><span class="tag">Hardening</span></div>
+        </div>
+      </div>
+
+      <div class="proj-card" id="p4">
+        <div class="proj-head"><span>cat 04_corporate-network-design.md</span><span>case_04</span></div>
+        <div class="proj-body">
+          <h3>Corporate network design</h3>
+          <p class="proj-role">role: network engineer (trainee)</p>
+          <p>Designed and implemented a small-to-medium business network topology, including VLAN segmentation, routing, DHCP, ACLs, and firewall rules. Tested connectivity, redundancy, and failover scenarios in simulation.</p>
+          <div class="tag-row"><span class="tag">Cisco / CCNA</span><span class="tag">VLANs</span><span class="tag">Packet Tracer</span><span class="tag">GNS3</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="contact">
+  <div class="wrap">
+    <p class="sec-cmd"><span class="p">$</span> <span class="c">cat contact.cfg</span></p>
+    <div class="reveal">
+      <a class="cfg-line" href="mailto:jihadmunsi59@gmail.com" style="text-decoration:none;">
+        <span class="cfg-key">email</span><span class="cfg-val">jihadmunsi59@gmail.com</span>
+      </a>
+      <a class="cfg-line" href="tel:+8801728956115" style="text-decoration:none;">
+        <span class="cfg-key">phone</span><span class="cfg-val">+880 1728-956115</span>
+      </a>
+      <a class="cfg-line" href="https://www.linkedin.com/in/mukidul-islam-zihad" target="_blank" rel="noopener" style="text-decoration:none;">
+        <span class="cfg-key">linkedin</span><span class="cfg-val">/in/mukidul-islam-zihad</span>
+      </a>
+      <a class="cfg-line" href="https://github.com/mukidulislamzihad" target="_blank" rel="noopener" style="text-decoration:none;">
+        <span class="cfg-key">github</span><span class="cfg-val">/mukidulislamzihad</span>
+      </a>
+      <a class="cfg-line" href="https://www.upwork.com/freelancers/~01d1b6929fea4d1879" target="_blank" rel="noopener" style="text-decoration:none;">
+        <span class="cfg-key">upwork</span><span class="cfg-val">freelancer profile</span>
+      </a>
+      <a class="cfg-line" href="https://www.instagram.com/mukidul_islam_zihad" target="_blank" rel="noopener" style="text-decoration:none;">
+        <span class="cfg-key">instagram</span><span class="cfg-val">@mukidul_islam_zihad</span>
+      </a>
+      <a class="cfg-line" href="https://www.facebook.com/jihadmunshii" target="_blank" rel="noopener" style="text-decoration:none;">
+        <span class="cfg-key">facebook</span><span class="cfg-val">/jihadmunshii</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <span class="p">$</span> echo "compiled in Dhaka, Bangladesh — 2026"
+</footer>
+
+<script>
+  const els = document.querySelectorAll('.reveal');
+  const io = new IntersectionObserver((entries)=>{
+    entries.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target);} });
+  }, {threshold:0.1});
+  els.forEach(el=>io.observe(el));
+</script>
+
+</body>
+</html>
